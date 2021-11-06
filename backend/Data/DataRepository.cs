@@ -29,13 +29,13 @@ namespace backend.Data
             }
         }
 
-        public PurchasingSingleResponse GetSinglePurchasing(int id)
+        public PurchasingSingleResponse GetSinglePurchasing(string id)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
-                return connection.QueryFirstOrDefault<PurchasingSingleResponse>(@"EXEC dbo.Manager_GetSingle @id = @id", new
+                return connection.QueryFirstOrDefault<PurchasingSingleResponse>(@"EXEC dbo.Search_purchasing @CatCode = @id", new
                 {
                     id = id
                 });

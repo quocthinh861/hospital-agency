@@ -10,6 +10,6 @@ namespace backend.Data
     {
          public ManagerSingleResponse GetSingleManager(string username, string password);
 
-        public PurchasingSingleResponse GetSinglePurchasing(int id);
+        public PurchasingSingleResponse GetSinglePurchasing(string id);
     }
 }

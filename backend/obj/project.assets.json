@@ -552,19 +552,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Giang\\.nuget\\packages\\": {}
+    "C:\\Users\\thinh\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Hospital\\hospital-agency\\backend\\backend.csproj",
+      "projectUniqueName": "D:\\hospital-agency\\backend\\backend.csproj",
       "projectName": "backend",
-      "projectPath": "G:\\Hospital\\hospital-agency\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\Giang\\.nuget\\packages\\",
-      "outputPath": "G:\\Hospital\\hospital-agency\\backend\\obj\\",
+      "projectPath": "D:\\hospital-agency\\backend\\backend.csproj",
+      "packagesPath": "C:\\Users\\thinh\\.nuget\\packages\\",
+      "outputPath": "D:\\hospital-agency\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Giang\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\thinh\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -609,12 +609,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.1.18, 3.1.18]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -623,7 +617,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.303\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

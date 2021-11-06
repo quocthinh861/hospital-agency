@@ -23,9 +23,24 @@ namespace backend.Controllers
 
         [HttpGet]
         [Route("supplier")]
-        public ActionResult<PurchasingSingleResponse> PurchasingResponse(int id)
+        public ActionResult<PurchasingSingleResponse> PurchasingResponse(string id)
         {
-
+            var purchase = _dataRepository.GetSinglePurchasing(id);
+            try
+            {
+                if (purchase != null)
+                {
+                    return purchase;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
         [HttpPost]

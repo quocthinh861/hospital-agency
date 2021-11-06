@@ -7,12 +7,11 @@ namespace backend.Models
 {
     public class PurchasingSingleResponse
     {
-        public string ManagerCode { get; set; };
-        public string SupplierCode { get; set; }
-        public string SupplierName { get; set; }
-        public string SupplierBankAccount { get; set; }
-        public string SupplierAddress { get; set; }
-        public string SupplierTaxCode { get; set; }
-        public virtual ICollection<SupplierPhoneNumber> SupplierPhoneNumbers { get; set; }
+        public string category_code { get; set; }
+        public string supplier_code { get; set; }
+        public string supplier_name{ get; set; }
+        public string supplier_bank_account { get; set; }
+        public string supplier_address { get; set; }
+        public string supplier_tax_code { get; set; }
     }
 }
