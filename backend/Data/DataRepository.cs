@@ -41,5 +41,38 @@ namespace backend.Data
                 });
             }
         }
+
+        public bool PostSupplier(SupplierResponse supplier)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                try
+                {
+                    var result = connection.QueryFirst<bool>(@"EXEC dbo.Insert_supplier @supplier_code = @supplier_code, @supplier_name = @supplier_name, @supplier_bank_account = @supplier_bank_account, @supplier_address = @supplier_address, @supplier_tax_code = @supplier_tax_code, @partner_staff_code = @partner_staff_code", new
+                    {
+                        supplier_code = supplier.supplier_code,
+                        supplier_name = supplier.supplier_name,
+                        supplier_bank_account = supplier.supplier_bank_account,
+                        supplier_address = supplier.supplier_address,
+                        supplier_tax_code = supplier.supplier_tax_code,
+                        partner_staff_code = supplier.partner_staff_code
+                    });
+
+                     if(result)
+                    {
+                        return true;
+                    }
+
+                    return false;
+                    
+                }
+                catch (Exception err)
+                {
+                    throw err;
+                }
+                
+            }
+        }
     }
 }

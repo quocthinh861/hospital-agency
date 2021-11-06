@@ -21,6 +21,30 @@ namespace backend.Controllers
             _dataRepository = dataRepository;
         }
 
+
+        [HttpPost]
+        [Route("supplier")]
+        public ActionResult<SupplierResponse> PurchasingResponse(SupplierResponse supplier)
+        {
+            try
+            {
+                var result = _dataRepository.PostSupplier(supplier);
+                if (result)
+                {
+                    return supplier;
+                }
+                else
+                {
+                    return NotFound();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         [HttpGet]
         [Route("supplier")]
         public ActionResult<PurchasingSingleResponse> PurchasingResponse(string id)

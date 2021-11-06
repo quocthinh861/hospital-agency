@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux'
 import axios from 'axios'
 import Login from "./pages/Login"
 import Home from "./pages/Home"
+import Add from "./pages/Add"
 
 
 function ProtectedRoute({user, children, ...props}){
@@ -39,8 +40,11 @@ function App() {
         <Route path='/register' exact>
           <Register />
         </Route>
-        <ProtectedRoute path='/' user exact>
+        <ProtectedRoute path='/' user={{as: "Asd"}} exact>
           <Home />
+        </ProtectedRoute>
+        <ProtectedRoute path='/supplier/addNew' user={{as: "Asd"}} exact>
+          <Add />
         </ProtectedRoute>
       </Switch>
     </Router>
