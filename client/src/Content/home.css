@@ -7,6 +7,12 @@ html {
     /* 2 */
   }
   
+  .input-select select {
+    border: none;
+    outline: none;
+    font-size: 21px;
+  }
+
   /* Sections
      ========================================================================== */
   /**

@@ -14,5 +14,6 @@ namespace backend.Data
 
         public bool PostSupplier(SupplierResponse supplier);
 
+        public IEnumerable<CategoryReponse> GetManyCategories(string id);
     }
 }

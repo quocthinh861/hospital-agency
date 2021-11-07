@@ -5,15 +5,36 @@ import '../Content/home.css'
 function Home() {
 
     const [purchase, setPurchase] = useState(null);
+    const [categories, setCategories] = useState(null);
     const [search, setSearch] = useState("");
+    const [choice, setChoice] = useState(0);
     const handleClick = async () => {
         console.log("click")
-        const result = await axios.get('http://localhost:3071/api/manager/supplier?id=' + search);
-
-        if(result.data != null)
+        
+        if(choice == 0)
         {
-            console.log(result.data)
-            setPurchase(result.data)
+            const result = await axios.get('http://localhost:3071/api/manager/supplier?id=' + search);
+
+            if(result.data != null)
+            {
+                console.log(result.data)
+                setPurchase(result.data)
+            }
+        }
+        else
+        {
+            const result = await axios.get('http://localhost:3071/api/manager/supplier/categories?id=' + search);
+
+            if(result.data.length > 0)
+            {
+                console.log(result.data)
+                console.log(new Date(result.data[0].supply_date.toLocaleString()))
+                var newObject = result.data.map(c =>{ 
+                    return {supply_date: c.supply_date.toLocaleString(), ...c}
+                })
+                console.log(newObject)
+                setCategories(newObject)
+            }
         }
         
     }
@@ -24,8 +45,11 @@ function Home() {
                 <div className="inner-form">
                 <div className="input-field first-wrap">
                     <div className="input-select">
-                    Category
-                </div>
+                        <select onChange={(e) => {setChoice(e.target.value)}}>
+                            <option value={0}>Category</option>
+                            <option value={1}>Supplier</option>
+                        </select>
+                    </div>
                 </div>
                 <div className="input-field second-wrap">
                     <input id="search" type="text" onChange={(e) => setSearch(e.target.value)} placeholder="Enter Keywords?" />
@@ -44,7 +68,7 @@ function Home() {
             </div>
             
             {   
-                purchase && ( 
+                (choice == 0) && purchase && ( 
                         <table className="table">
                             <thead>
                                 <tr>
@@ -67,6 +91,36 @@ function Home() {
                             </tbody>
                         </table>
                 )
+            }
+            {
+                (choice == 1) && categories && ( 
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">CategoryCode</th>
+                                <th scope="col">CategoryName</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">SupplierCode</th>
+                                <th scope="col">SupplyQuantity</th>
+                                <th scope="col">SupplyDate</th>
+                                <th scope="col">SupplyPrice</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                categories.map((e, idx) => (
+                                    <tr key={idx}>
+                                        {
+                                            Object.values(e).map((c, index) => (
+                                                <td key={index}>{c}</td>
+                                            )) 
+                                        }
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+            )
             }
         </div>
     )

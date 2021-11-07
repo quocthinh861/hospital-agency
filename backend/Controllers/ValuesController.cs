@@ -89,5 +89,29 @@ namespace backend.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("supplier/categories")]
+        public IEnumerable<CategoryReponse> GetManyCategories(string id)
+        {
+            var categories = _dataRepository.GetManyCategories(id);
+            try
+            {
+                if (categories != null)
+                {
+                    return categories;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
+
     }
 }

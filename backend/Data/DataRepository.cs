@@ -42,6 +42,28 @@ namespace backend.Data
             }
         }
 
+        public IEnumerable<CategoryReponse> GetManyCategories(string id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                try
+                {
+                    var result = connection.Query<CategoryReponse>(@"EXEC dbo.List_Categories @supplierID = @id", new
+                    {
+                        id = id
+                    });
+
+                    return result;
+                }
+                catch(Exception err)
+                {
+                    throw err;
+                }
+            }
+        }
+
         public bool PostSupplier(SupplierResponse supplier)
         {
             using (var connection = new SqlConnection(_connectionString))
