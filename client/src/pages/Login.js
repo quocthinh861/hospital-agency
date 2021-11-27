@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {login} from '../slices/apiCalls'
 import { useHistory } from 'react-router-dom';
@@ -70,11 +70,14 @@ const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     await login(dispatch, {username: username, password: password});
+  }
+
+  useEffect(()=>{
     if(currentUser)
     {
       history.push('/')
     }
-  }
+  },[currentUser])
 
   return (
     <Container>

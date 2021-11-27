@@ -40,10 +40,10 @@ function App() {
         <Route path='/register' exact>
           <Register />
         </Route>
-        <ProtectedRoute path='/' user={{as: "Asd"}} exact>
+        <ProtectedRoute path='/' user={user.currentUser} exact>
           <Home />
         </ProtectedRoute>
-        <ProtectedRoute path='/supplier/addNew' user={{as: "Asd"}} exact>
+        <ProtectedRoute path='/supplier/addNew' user={user.currentUser} exact>
           <Add />
         </ProtectedRoute>
       </Switch>

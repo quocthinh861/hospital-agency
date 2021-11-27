@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import {loginStart, loginSuccess, loginFailure, logout} from '../slices/userSlice'
 import '../Content/home.css'
-function Home() {
+import { useHistory } from 'react-router-dom';
 
+function Home() {
+    const history = useHistory();
     const [purchase, setPurchase] = useState(null);
     const [categories, setCategories] = useState(null);
     const [search, setSearch] = useState("");
     const [choice, setChoice] = useState(0);
+    const dispatch = useDispatch();
+
     const handleClick = async () => {
         console.log("click")
         
@@ -39,6 +45,11 @@ function Home() {
         
     }
 
+    const logOut = () => {
+        dispatch(logout());
+        history.push('/login');
+    }
+
     return (
         <div className="s003">
             <form>
@@ -65,6 +76,7 @@ function Home() {
             </form>
             <div style={{width: '750px'}}>
                 <Link style={{color: 'white',float: 'right', marginTop: '10px'}}  to='/supplier/addNew'>Add new?</Link>
+                <Link style={{color: 'white',float: 'right', marginTop: '10px', marginRight: '10px'}} onClick={logOut} to='#'>Logout</Link>
             </div>
             
             {   
