@@ -34,15 +34,15 @@ function App() {
   return (
     <Router>
       <Switch>
+        <ProtectedRoute path='/' user={user.currentUser}>
+          <Home />
+        </ProtectedRoute>
         <Route path='/login' exact>
           <Login />
         </Route>
         <Route path='/register' exact>
           <Register />
         </Route>
-        <ProtectedRoute path='/' user={user.currentUser} exact>
-          <Home />
-        </ProtectedRoute>
         <ProtectedRoute path='/supplier/addNew' user={user.currentUser} exact>
           <Add />
         </ProtectedRoute>

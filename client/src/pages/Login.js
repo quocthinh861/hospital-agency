@@ -75,7 +75,7 @@ const Login = () => {
   useEffect(()=>{
     if(currentUser)
     {
-      history.push('/')
+      history.push('/home')
     }
   },[currentUser])
 
