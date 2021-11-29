@@ -22,10 +22,45 @@ namespace backend.Data
             using(var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
+                try
+                {
+                    ManagerSingleResponse rs = connection.QueryFirstOrDefault<ManagerSingleResponse>(@"EXEC dbo.Manager_GetSingle @username = @manager_username, @password = @manager_password", new
+                    {
+                        manager_username = username,
+                        manager_password = password
+                    });
+                    if (rs != null)
+                        return rs;
+                    return null;
+                }
+                catch(Exception err)
+                {
+                    return null;
+                }
+                
+            }
+        }
 
-                return connection.QueryFirstOrDefault<ManagerSingleResponse>(@"EXEC dbo.Manager_GetSingle @username = @manager_username, @password = @manager_password", new { 
-                    manager_username = username, manager_password = password
-                });
+        public IEnumerable<PhoneResponse> GetPhoneNumber(string id)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                try
+                {
+                   var rs = connection.Query<PhoneResponse>(@"EXEC dbo.Search_phonenumber @supplierId = @supplierId", new
+                    {
+                        supplierId = id
+                    });
+                    if (rs != null)
+                        return rs;
+                     
+                    return null;
+                }
+                catch (Exception err)
+                {
+                    return null;
+                }
             }
         }
 
@@ -35,10 +70,22 @@ namespace backend.Data
             {
                 connection.Open();
 
-                return connection.QueryFirstOrDefault<PurchasingSingleResponse>(@"EXEC dbo.Search_purchasing @CatCode = @id", new
+                var res = connection.QueryFirstOrDefault<PurchasingSingleResponse>(@"EXEC dbo.Search_purchasing @CatCode = @id", new
                 {
                     id = id
                 });
+
+                if (res != null)
+                {
+                    res.phoneNumber = connection.Query<string>(@"EXEC dbo.Search_phonenumber @supplierId = @id", new
+                    {
+                        id = res.supplier_code
+                    });
+
+                    return res;
+
+                }
+                return null;
             }
         }
 
@@ -71,7 +118,7 @@ namespace backend.Data
                 connection.Open();
                 try
                 {
-                    var result = connection.QueryFirst<bool>(@"EXEC dbo.Insert_supplier @supplier_code = @supplier_code, @supplier_name = @supplier_name, @supplier_bank_account = @supplier_bank_account, @supplier_address = @supplier_address, @supplier_tax_code = @supplier_tax_code, @partner_staff_code = @partner_staff_code", new
+                    connection.Query<bool>(@"EXEC dbo.Insert_supplier @supplier_code = @supplier_code, @supplier_name = @supplier_name, @supplier_bank_account = @supplier_bank_account, @supplier_address = @supplier_address, @supplier_tax_code = @supplier_tax_code, @partner_staff_code = @partner_staff_code", new
                     {
                         supplier_code = supplier.supplier_code,
                         supplier_name = supplier.supplier_name,
@@ -81,17 +128,12 @@ namespace backend.Data
                         partner_staff_code = supplier.partner_staff_code
                     });
 
-                     if(result)
-                    {
-                        return true;
-                    }
-
-                    return false;
+                    return true;
                     
                 }
                 catch (Exception err)
                 {
-                    throw err;
+                    return false;
                 }
                 
             }

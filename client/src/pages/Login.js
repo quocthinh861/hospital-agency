@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {login} from '../slices/apiCalls'
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100vw;
@@ -67,12 +67,15 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const {isFetching, error, currentUser} = useSelector(state => state.user)
   const dispatch = useDispatch();
+
+console.log(error)
+
   const handleClick = async (e) => {
     e.preventDefault();
     await login(dispatch, {username: username, password: password});
-    if(currentUser)
+    if(error == false)
     {
-      history.push('/')
+      console.log("success");
     }
   }
 

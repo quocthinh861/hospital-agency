@@ -31,7 +31,25 @@ namespace backend
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
             }));
-            
+
+            services
+        .AddMvcCore(options =>
+        {
+            options.RequireHttpsPermanent = true; // does not affect api requests
+            options.RespectBrowserAcceptHeader = true; // false by default
+            //options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>()
+        })
+        //.AddApiExplorer()
+        //.AddAuthorization()
+        .AddFormatterMappings();
+        //.AddCacheTagHelper()
+        //.AddDataAnnotations()
+        //.AddCors()
+
+            services.AddControllers()
+                    .AddJsonOptions(options =>
+                        options.JsonSerializerOptions.PropertyNamingPolicy = null);
+
 
             services.AddScoped<IDataRepository, DataRepository>();
         }

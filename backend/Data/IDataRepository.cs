@@ -8,9 +8,9 @@ namespace backend.Data
 {
     public interface IDataRepository
     {
-         public ManagerSingleResponse GetSingleManager(string username, string password);
+        public ManagerSingleResponse GetSingleManager(string username, string password);
 
-         public PurchasingSingleResponse GetSinglePurchasing(string id);
+        public PurchasingSingleResponse GetSinglePurchasing(string id);
 
         public bool PostSupplier(SupplierResponse supplier);
 

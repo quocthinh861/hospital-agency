@@ -35,7 +35,7 @@ namespace backend.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return null;
                 }
             }
             catch (Exception ex)
@@ -58,12 +58,12 @@ namespace backend.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return null;
                 }
             }
             catch(Exception ex)
             {
-                throw ex;
+                return null;
             }
         }
 
@@ -80,12 +80,12 @@ namespace backend.Controllers
                 }
                 else
                 {
-                    return NotFound();
+                    return null;
                 }
             }
             catch(Exception ex)
             {
-                throw ex;
+                return null;
             }
         }
 
@@ -107,7 +107,7 @@ namespace backend.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return null;
             }
         }
 

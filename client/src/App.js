@@ -8,10 +8,10 @@ import Home from "./pages/Home"
 import Add from "./pages/Add"
 
 
-function ProtectedRoute({user, children, ...props}){
+function ProtectedRoute({flag, children, ...props}){  
   return  <Route 
   render = {() => {
-    if(!user){
+    if(!flag){
       return <Redirect to='/login'></Redirect>
     }
     else {
@@ -29,7 +29,7 @@ function Register(){
 }
 
 function App() {
-  const user = useSelector(state => state.user);
+  const isError = useSelector(state => state.user.error);
 
   return (
     <Router>
@@ -40,10 +40,10 @@ function App() {
         <Route path='/register' exact>
           <Register />
         </Route>
-        <ProtectedRoute path='/' user={{as: "Asd"}} exact>
+        <ProtectedRoute path='/' flag={isError} exact>
           <Home />
         </ProtectedRoute>
-        <ProtectedRoute path='/supplier/addNew' user={{as: "Asd"}} exact>
+        <ProtectedRoute path='/supplier/addNew' flag={isError} exact>
           <Add />
         </ProtectedRoute>
       </Switch>

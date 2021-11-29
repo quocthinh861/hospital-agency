@@ -5,7 +5,11 @@ export const login = async (dispatch, user) => {
     dispatch(loginStart())
     try {
         const res = await axios.post('http://localhost:3071/api/manager/login', user);
-        dispatch(loginSuccess(res.data))
+        console.log(res.data)
+        if(res.data == 1)
+            dispatch(loginSuccess())
+        else
+            dispatch(loginFailure())
     } catch(err){
         dispatch(loginFailure())
     }
